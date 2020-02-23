@@ -4,8 +4,7 @@
   "description": "Example of brittle-graph in use",
   "main": "index.js",
   "scripts": {
-    "start": "node ./build/server.js",
-    "watch": "ts-node-dev --inspect --poll --respawn --interval 1000 --transpileOnly ./src/server.ts",
+    "start": "ts-node  -T ./src/index.ts",
     "build": "tsc --outDir ./build",
     "pkg": "pkg -t node8-alpine-x64 --output app ./build/index.js",
     "typecheck": "tsc --noEmit",
@@ -22,11 +21,13 @@
   },
   "homepage": "https://github.com/Stitch-Money/brittle-graph-sample#readme",
   "dependencies": {
-    "@stitch-money/brittle-graph": "^0.1.0"
+    "@stitch-money/brittle-graph": "^0.1.0",
+    "jarvis": "github:hliyan/jarvis"
   },
   "devDependencies": {
     "@types/node": "^13.7.4",
     "pkg": "^4.4.3",
+    "ts-node": "^8.6.2",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.2"
   },
