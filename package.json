@@ -1,0 +1,32 @@
+{
+  "name": "brittle-graph-sample",
+  "version": "1.0.0",
+  "description": "Example of brittle-graph in use",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./build/server.js",
+    "watch": "ts-node-dev --inspect --poll --respawn --interval 1000 --transpileOnly ./src/server.ts",
+    "build": "tsc --outDir ./build",
+    "typecheck": "tsc --noEmit",
+    "tsc": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stitch-Money/brittle-graph-sample.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Stitch-Money/brittle-graph-sample/issues"
+  },
+  "homepage": "https://github.com/Stitch-Money/brittle-graph-sample#readme",
+  "dependencies": {
+    "@stitch-money/brittle-graph": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.7.4",
+    "pkg": "^4.4.3",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.8.2"
+  }
+}
