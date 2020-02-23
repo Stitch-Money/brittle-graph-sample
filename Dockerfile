@@ -1,25 +1,27 @@
-FROM node:12-alpine as base
+FROM node:12-alpine as build
 
 
 WORKDIR /app
 ARG GITHUB_TOKEN
 RUN export GITHUB_TOKEN=${GITHUB_TOKEN}
 COPY .npmrc .npmrc
+COPY ./tsconfig.json ./tsconfig.json
 COPY package.json ./package.json
 
-RUN npm install --only=prod
+RUN npm install
 
-FROM base as builder
-
-ARG GITHUB_TOKEN
-RUN export GITHUB_TOKEN=${GITHUB_TOKEN}
-RUN npm install --only=dev
-COPY ./tsconfig.json ./tsconfig.json
 COPY ./src/ ./src
 
 RUN npm run build
+RUN npm run pkg
 
-FROM base as runner
-COPY --from=builder /app/build /app/build/
+FROM alpine:latest as runner
+WORKDIR /app
+ENV NODE_ENV=production
 
-ENTRYPOINT [ "/bin/sh", "-c", "npm run start" ]
+# install required libs
+RUN apk update && apk add --no-cache libstdc++ libgcc
+
+# copy prebuilt binary from previous step
+COPY --from=build /app/app /app/app
+CMD ["/app/app"]
